@@ -65,4 +65,9 @@ EXE =
 3、make
 ```
 
-**3编译完成**
+**3、编译完成**
+
+**4、以上提供的源代码均可以编译通过**
+
+**5、testProgs目录下有自带的测试demo，其中testOnDemandRTSPServer.cpp和testRTSPClient.cpp我进行了改写，可以直接推拉流本地的264，可以根据自己需要实现摄像头采集推流，拉流渲染**。
+
