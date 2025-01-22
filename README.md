@@ -37,9 +37,32 @@ make&&make install
 
 **2、生成对应make文件**
 
-```
-1、如果不需要交叉编译只需要执行
+```c
+一、如果不需要交叉编译只需要执行
 ./genMakefile linux
 make 会生成对应的头文件和库文件，使用的使用只需要将该库和头文件集成到自己的项目中
+二、交叉编译
+1、将config.linux脚本改为以下内容
+CROSS_COMPILE?=	 /opt/837S_toolchain/toolchain-sunxi-musl/toolchain/bin/arm-openwrt-linux-muslgnueabi-  #交叉编译链
+COMPILE_OPTS =		$(INCLUDES) -I/home/zjl/dsp/rtsp/openssl/include -I. -O2 -DSOCKLEN_T=socklen_t -DNO_SSTREAM=1 -D_LARGEFILE_SOURCE=1 -D_FILE_OFFSET_BITS=64 -g -DALLOW_RTSP_SERVER_PORT_REUSE
+C =			c
+C_COMPILER =		$(CROSS_COMPILE)gcc
+C_FLAGS =		$(COMPILE_OPTS)
+CPP =			cpp
+CPLUSPLUS_COMPILER =	$(CROSS_COMPILE)g++
+CPLUSPLUS_FLAGS =	$(COMPILE_OPTS) -Wall -DBSD=1
+OBJ =			o
+LINK =			$(CROSS_COMPILE)g++ -o
+LINK_OPTS =		
+CONSOLE_LINK_OPTS =	$(LINK_OPTS)
+LIBRARY_LINK =		$(CROSS_COMPILE)ar cr 
+LIBRARY_LINK_OPTS =	$(LINK_OPTS)
+LIB_SUFFIX =			a
+LIBS_FOR_CONSOLE_APPLICATION = -L/home/zjl/dsp/rtsp/openssl/lib64 -lssl -lcrypto  #openssl交叉编译链路径
+LIBS_FOR_GUI_APPLICATION =
+EXE =
+2、修改完成之后执行./genMakefile linux
+3、make
 ```
 
+**3编译完成**
