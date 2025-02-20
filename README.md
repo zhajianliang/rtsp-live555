@@ -20,6 +20,7 @@ live会依赖openssl的库文件，编译live555源代码之前需要先确保op
 	–prefix=: 安装路径，编译完成install后将有bin，lib，include等文件夹
 	–cross-compile-prefix=: 交叉编译工具
     -static ：生成静态库
+    -no-shared：不生成动态库
 ```
 
 **3、修改makefile，去除掉 -m64和-m32选项**
@@ -70,4 +71,6 @@ EXE =
 **4、以上提供的源代码均可以编译通过**
 
 **5、testProgs目录下有自带的测试demo，其中testOnDemandRTSPServer.cpp和testRTSPClient.cpp我进行了改写，可以直接推拉流本地的264，可以根据自己需要实现摄像头采集推流，拉流渲染**。
+
+**6.LIVE555默认使用UDP的方式传输数据，如果想改为TCP的方式则只需要在testRTSPClient.cpp文件#define REQUEST_STREAMING_OVER_TCP True即可**
 
