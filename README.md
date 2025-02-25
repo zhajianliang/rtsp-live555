@@ -1,7 +1,7 @@
 # rtsp-live555
 # 编译过程
 
-live会依赖openssl的库文件，编译live555源代码之前需要先确保openssl正常安装。
+live会依赖openssl的库文件，编译live555源代码之前需要先确保openssl正常安装。(在config.linux文件中加上宏DNO_OPENSSL=1关闭openssl依赖，去掉#LIBS_FOR_CONSOLE_APPLICATION = -lssl -lcrypto链接选项)
 
 ## openssl交叉编译
 
